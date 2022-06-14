@@ -7,13 +7,13 @@ import re
 def change_dir(d):
     if os.path.isdir(d):
         os.chdir(d)
-        print("Current Directory: {}".format(os.getcwd()))
+        print(Fore.GREEN+"Current Directory: {}".format(os.getcwd())+Fore.RESET+"\n")
     else:
-        print("Directory not found.")
+        print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
 
 def start():
     init()
-    print(Back.BLUE+"\n------------------------------FILE MANAGER------------------------------"+Back.RESET+"\n")
+    print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Directorio actual: {} ".format(os.getcwd())+"\n")
         
 
@@ -21,7 +21,7 @@ commands = ['cd','q']
 start()
 
 while True:
-    command = input("c:\> ").split(" ")
+    command = input("C:\> ").split(" ")
     if command[0] in commands:
         if command[0] == 'cd':
             change_dir(command[1])
@@ -29,3 +29,4 @@ while True:
             break
     else:
         print("INVALID COMMAND")
+            
