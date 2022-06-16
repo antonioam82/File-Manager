@@ -11,13 +11,20 @@ def change_dir(d):
     else:
         print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
 
+def show_files():
+    counter = 1
+    for i in os.listdir():
+        print(Fore.YELLOW + str(counter) + "- " + i)
+        counter += 1
+    print(Fore.RESET+"\n")
+
 def start():
     init()
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Directorio actual: {} ".format(os.getcwd())+"\n")
         
 
-commands = ['cd','q']
+commands = ['cd','q','ls']
 start()
 
 while True:
@@ -27,6 +34,9 @@ while True:
             change_dir(command[1])
         elif command[0] == 'q':
             break
+        elif command[0] == 'ls':
+            show_files()
     else:
         print("INVALID COMMAND")
+            
             
