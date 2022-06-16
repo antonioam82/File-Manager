@@ -12,16 +12,16 @@ def change_dir(d):
         print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
 
 def show_files():
-    counter = 1
+    counter = 0
     for i in os.listdir():
-        print(Fore.YELLOW + str(counter) + "- " + i)
         counter += 1
-    print(Fore.RESET+"\n")
+        print(Fore.YELLOW + str(counter) + "- " + i)
+    print(Back.GREEN+Fore.BLACK+"\n{} FILES FOUNDED\n".format(str(counter))+Back.RESET+Fore.RESET)
 
 def start():
     init()
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
-    print("Directorio actual: {} ".format(os.getcwd())+"\n")
+    print("Current dir: {} ".format(os.getcwd())+"\n")
         
 
 commands = ['cd','q','ls']
