@@ -27,14 +27,14 @@ def show_files():
 def start():
     init()
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
-    print("Current dir: {} ".format(os.getcwd())+"\n")
-        
+    #print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
+    print("Current Directory: {}\n".format(os.getcwd()))
 
 commands = ['cd','q','ls','cl','sd']
 start()
 
 while True:
-    command = input("C:\> ").split(" ")
+    command = input("FM:\> ").split(" ")
     if command[0] in commands:
         if command[0] == 'cd':
             change_dir(command[1])
@@ -48,6 +48,6 @@ while True:
         elif command[0] == 'sd':
             print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
     else:
-        print("INVALID COMMAND")
+        print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)
             
             
