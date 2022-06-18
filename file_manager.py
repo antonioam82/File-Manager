@@ -19,10 +19,18 @@ def clear():
 
 def show_files():
     counter = 0
-    for i in os.listdir():
+    with os.scandir() as entries:
+        for entry in entries:
+            if os.path.isdir(entry):
+                print(Fore.GREEN + str(counter) + "- " + entry.name)
+            else:
+                print(Fore.YELLOW + str(counter) + "- " + entry.name)
+            counter += 1
+    print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter))+Back.RESET+Fore.RESET+"\n")    
+    '''for i in os.listdir():
         counter += 1
         print(Fore.YELLOW + str(counter) + "- " + i)
-    print(Back.GREEN+Fore.BLACK+"\n{} FILES FOUNDED".format(str(counter))+Back.RESET+Fore.RESET+"\n")
+    print(Back.GREEN+Fore.BLACK+"\n{} FILES FOUNDED".format(str(counter))+Back.RESET+Fore.RESET+"\n")'''
 
 def start():
     init()
