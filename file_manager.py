@@ -18,7 +18,7 @@ def clear():
         os.system("cls")
 
 def show_files():
-    counter = 0
+    counter = 1
     with os.scandir() as entries:
         for entry in entries:
             if os.path.isdir(entry):
@@ -26,7 +26,7 @@ def show_files():
             else:
                 print(Fore.YELLOW + str(counter) + "- " + entry.name)
             counter += 1
-    print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter))+Back.RESET+Fore.RESET+"\n")    
+    print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")    
     '''for i in os.listdir():
         counter += 1
         print(Fore.YELLOW + str(counter) + "- " + i)
@@ -71,6 +71,4 @@ while True:
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n") 
     else:
-        print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)
-            
-            
+        print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)            
