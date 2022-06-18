@@ -37,16 +37,31 @@ while True:
     command = input("FM:\> ").split(" ")
     if command[0] in commands:
         if command[0] == 'cd':
-            change_dir(command[1])
+            if len(command) == 2:
+                change_dir(command[1])
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'q':
-            break
+            if len(command) == 1:
+                break
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'ls':
-            show_files()
+            if len(command) == 1:############################################3
+                show_files()
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'cl':
-            clear()
-            start()
+            if len(command) == 1:
+                clear()
+                start()
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")     
         elif command[0] == 'sd':
-            print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
+            if len(command) == 1:
+                print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n") 
     else:
         print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)
             
