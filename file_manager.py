@@ -5,11 +5,15 @@ from colorama import init, Fore, Back, Style
 import re
 
 def change_dir(d):
-    if os.path.isdir(d):
-        os.chdir(d)
-        print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
-    else:
-        print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
+    try:
+        if os.path.isdir(d):
+            os.chdir(d)
+            print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
+        else:
+            print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
+            
+    except Exception as e:
+        print(Fore.RED + str(e) + Fore.RESET + "\n")
 
 def clear():
     if os.name == "posix":
@@ -30,9 +34,9 @@ def show_files(t):
                     print(Fore.YELLOW + str(counter) + "- " + entry.name)
                     counter += 1
         if counter > 1:
-            print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
+            print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED ".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
         else:
-            print(Back.RED+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
+            print(Back.RED+Fore.BLACK+"\n{} ITEMS FOUNDED ".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
             
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
@@ -40,7 +44,6 @@ def show_files(t):
 def start():
     init()
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
-    #print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
 commands = ['cd','q','ls','cl','sd','fl','fld']
@@ -78,4 +81,5 @@ while True:
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n") 
     else:
-        print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)            
+        print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)
+           
