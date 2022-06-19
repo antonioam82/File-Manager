@@ -17,20 +17,25 @@ def clear():
     elif os.name == "ce" or os.name == "nt" or os.name == "dos":
         os.system("cls")
 
-def show_files():
+def show_files(t):
     counter = 1
-    with os.scandir() as entries:
-        for entry in entries:
-            if os.path.isdir(entry):
-                print(Fore.GREEN + str(counter) + "- " + entry.name)
-            else:
-                print(Fore.YELLOW + str(counter) + "- " + entry.name)
-            counter += 1
-    print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")    
-    '''for i in os.listdir():
-        counter += 1
-        print(Fore.YELLOW + str(counter) + "- " + i)
-    print(Back.GREEN+Fore.BLACK+"\n{} FILES FOUNDED".format(str(counter))+Back.RESET+Fore.RESET+"\n")'''
+    try:
+        with os.scandir() as entries:
+            for entry in entries:
+                if os.path.isdir(entry) and (t == 'ls' or t == 'fld'):
+                    print(Fore.GREEN + str(counter) + "- " + entry.name)
+                    counter += 1
+                
+                elif os.path.isfile(entry) and (t == 'ls' or t == 'fl'):
+                    print(Fore.YELLOW + str(counter) + "- " + entry.name)
+                    counter += 1
+        if counter > 1:
+            print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
+        else:
+            print(Back.RED+Fore.BLACK+"\n{} ITEMS FOUNDED".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
+            
+    except Exception as e:
+        print(Fore.RED + str(e) + Fore.RESET + "\n")
 
 def start():
     init()
@@ -38,7 +43,7 @@ def start():
     #print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd']
+commands = ['cd','q','ls','cl','sd','fl','fld']
 start()
 
 while True:
@@ -56,9 +61,9 @@ while True:
                 break
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
-        elif command[0] == 'ls':
-            if len(command) == 1:############################################3
-                show_files()
+        elif command[0] == 'ls' or command[0] == 'fl' or command[0] == 'fld':
+            if len(command) == 1:
+                show_files(command[0])
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'cl':
