@@ -44,7 +44,6 @@ def show_files(t):
 def start():
     init()
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
-    #print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
 commands = ['cd','q','ls','cl','sd','fl','fld']
