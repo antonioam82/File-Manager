@@ -45,8 +45,10 @@ while True:
     command = input("FM:\> ").split(" ")
     if command[0] in commands:
         if command[0] == 'cd':
-            if len(command) == 2:
-                change_dir(command[1])
+            if len(command) >= 2:
+                command.pop(0)
+                direc = (" ").join(command)
+                change_dir(direc)
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'q':
