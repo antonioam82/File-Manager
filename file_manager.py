@@ -89,8 +89,10 @@ while True:
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'md':
-            if len(command) == 2:
-                make_dir(command[1])
+            if len(command) >= 2:
+                command.pop(0)
+                nf = (" ").join(command)
+                make_dir(nf)
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
     else:
