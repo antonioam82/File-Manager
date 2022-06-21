@@ -15,6 +15,13 @@ def change_dir(d):
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
 
+def remove_folder(f):
+    try:
+        os.rmdir(f)
+        print("DELETED: " +Fore.GREEN+ "{}".format(f)+Fore.RESET+"\n")
+    except Exception as e:
+        print(Fore.RED + str(e) + Fore.RESET + "\n")
+        
 def make_dir(d):
     try:
         os.mkdir(d)
@@ -57,7 +64,7 @@ def start():
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md']
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd']
 start()
 
 while True:
@@ -96,6 +103,13 @@ while True:
                 command.pop(0)
                 nf = (" ").join(command)
                 make_dir(nf)
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
+        elif command[0] == 'rmd':
+            if len(command) >= 2:
+                command.pop(0)
+                rd = (" ").join(command)
+                remove_folder(rd)
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
     else:
