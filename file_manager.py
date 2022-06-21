@@ -28,6 +28,9 @@ def clear():
     elif os.name == "ce" or os.name == "nt" or os.name == "dos":
         os.system("cls")
 
+def BMP(s):
+    return "".join((i if ord(i) < 10000 else '\ufffd' for i in s))
+
 def show_files(t):
     print("")
     counter = 1
@@ -35,11 +38,11 @@ def show_files(t):
         with os.scandir() as entries:
             for entry in entries:
                 if os.path.isdir(entry) and (t == 'ls' or t == 'fld'):
-                    print(Fore.GREEN + str(counter) + "- " + entry.name)
+                    print(BMP(Fore.GREEN + str(counter) + "- " + entry.name))#############
                     counter += 1
                 
                 elif os.path.isfile(entry) and (t == 'ls' or t == 'fl'):
-                    print(Fore.YELLOW + str(counter) + "- " + entry.name)
+                    print(BMP(Fore.YELLOW + str(counter) + "- " + entry.name))
                     counter += 1
         if counter > 1:
             print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUNDED ".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
