@@ -18,14 +18,16 @@ def change_dir(d):
 def remove_folder(f):
     try:
         os.rmdir(f)
-        print("DELETED: " +Fore.GREEN+ "{}".format(f)+Fore.RESET+"\n")
+        f = Fore.RED+f+Fore.RESET
+        d = Fore.GREEN+os.getcwd()+Fore.RESET
+        print("DELETED {} FROM {}\n".format(f, d))
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
         
 def make_dir(d):
     try:
         os.mkdir(d)
-        print("Created new directory: " +Fore.GREEN+ "{}".format(d)+Fore.RESET+"\n")
+        print("Created new directory: " + Fore.GREEN + os.path.join(os.getcwd(),d) + Fore.RESET + "\n")
     except Exception as e:
         print(Fore.RED+str(e)+Fore.RESET+"\n")
 
