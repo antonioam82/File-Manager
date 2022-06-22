@@ -21,6 +21,9 @@ def remove_folder(f):
         f = Fore.RED+f+Fore.RESET
         d = Fore.GREEN+os.getcwd()+Fore.RESET
         print("DELETED {} FROM {}\n".format(f, d))
+
+        print("DELETED: " +Fore.GREEN+ "{}".format(f)+Fore.RESET+"\n")
+
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
         
@@ -116,4 +119,3 @@ while True:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
     else:
         print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)
-                       
