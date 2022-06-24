@@ -15,12 +15,26 @@ def change_dir(d):
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
 
+def ny(c):
+    while c!=("Y") and c!=("N") and c!=("y") and c!=("n"):
+        print(chr(7));c=input("Enter \'N/n\' or \'Y/y\': ")
+    return(c)
+
 def remove_folder(f):
     try:
-        os.rmdir(f)
-        f = Fore.RED+f+Fore.RESET
-        d = Fore.GREEN+os.getcwd()+Fore.RESET
-        print("DELETED {} FROM {}\n".format(f, d))
+        if os.path.isdir(f):
+            file = Fore.RED+f+Fore.RESET
+            dire = Fore.GREEN+os.getcwd()+Fore.RESET
+            print("You are goin to remove {} from {}".format(file, dire))
+            c = ny(input("CONTINUE?[Y/n]: "))
+            if c.upper() == "Y":
+                os.rmdir(f)
+                print("REMOVED {} FROM {}\n".format(file, dire))
+            else:
+                print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
+        else:
+            print(Fore.RED+"FOLDER NOT FOUND."+Fore.RESET+"\n")
+
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
         
