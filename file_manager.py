@@ -166,4 +166,3 @@ while True:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
     else:
         print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)
-                       
