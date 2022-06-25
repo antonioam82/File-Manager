@@ -25,7 +25,7 @@ def remove_folder(f):
         if os.path.isdir(f):
             file = Fore.RED+f+Fore.RESET
             dire = Fore.GREEN+os.getcwd()+Fore.RESET
-            print("You are goin to remove {} from {}".format(file, dire))
+            print("You are going to remove {} from {}".format(file, dire))
             c = ny(input("CONTINUE?[Y/n]: "))
             if c.upper() == "Y":
                 os.rmdir(f)
@@ -113,7 +113,7 @@ commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs']
 start()
 showed_dir = False
 while True:
-    command = input("FM:\> ").split(" ")
+    command = input(os.getcwd()+"\FM:\> ").split(" ")
     if command[0] in commands:
         if command[0] == 'cd':
             if len(command) >= 2:
