@@ -54,10 +54,34 @@ def clear():
 def BMP(s):
     return "".join((i if ord(i) < 10000 else '\ufffd' for i in s))
 
+def counter_label(n, s):
+    if n == 0:
+        print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
+    else:
+        if n == 1:
+            print(Fore.BLACK+Back.GREEN+"\n1 ITEMS FOUND."+Fore.RESET+Back.RESET+"\n")
+        else:
+            print(Fore.BLACK+Back.GREEN+"\n{} ITEMS FOUND.".format(n)+Fore.RESET+Back.RESET+"\n")
+
+def regex_search_di(s):
+    count = 0
+    try:
+        print("")
+        for i in os.listdir():
+            match_ = re.search(s, i)
+            if match_:
+                count+=1
+                print(Fore.GREEN+'{}-'.format(count)+os.path.join(os.getcwd(),BMP(Fore.YELLOW+Style.DIM+i+Fore.RESET+Style.NORMAL)))
+        counter_label(count, s)
+        
+    except Exception as e:
+        print(Fore.RED+str(e)+Fore.RESET+"\n")
+
 def regex_search(s):
     global showed_dir
     count = 0
     try:
+        print("")
         for root, folders, files in os.walk(os.getcwd()):
             for file in files:
                 match_ = re.search(s, file)
@@ -66,13 +90,15 @@ def regex_search(s):
                     count+=1
                     print(Fore.GREEN+'{}-'.format(count)+os.path.join(root,BMP(Fore.YELLOW+Style.DIM+file+Fore.RESET+Style.NORMAL)))
             showed_dir = False
-        if count == 0:
+
+        counter_label(count, s)
+        '''if count == 0:
             print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
         else:
             if count == 1:
                 print(Fore.BLACK+Back.GREEN+"\n1 FILES FOUND."+Fore.RESET+Back.RESET+"\n")
             else:
-                print(Fore.BLACK+Back.GREEN+"\n{} FILES FOUND.".format(count)+Fore.RESET+Back.RESET+"\n")
+                print(Fore.BLACK+Back.GREEN+"\n{} FILES FOUND.".format(count)+Fore.RESET+Back.RESET+"\n")'''
                 
     except Exception as e:
         print(Fore.BLACK+Back.RED+'ERROR: {} '.format(str(e))+Fore.RESET+Back.RESET+"\n")
@@ -109,7 +135,7 @@ def start():
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs']
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs']
 start()
 showed_dir = False
 while True:
@@ -164,5 +190,13 @@ while True:
                 regex_search(string)
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
+        elif command[0] == 'rs':
+            if len(command) == 2:
+                command.pop(0)
+                string = (" ").join(command)
+                regex_search_di(string)
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
     else:
-        print(Fore.RED+"INVALID COMMAND\n"+Fore.RESET)
+        print(Fore.RED+"UNKNOW COMMAND\n"+Fore.RESET)
+
