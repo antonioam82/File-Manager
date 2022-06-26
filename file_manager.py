@@ -184,14 +184,14 @@ while True:
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'trs':
-            if len(command) == 2:
+            if len(command) >= 2:
                 command.pop(0)
                 string = (" ").join(command)
                 regex_search(string)
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'rs':
-            if len(command) == 2:
+            if len(command) >= 2:
                 command.pop(0)
                 string = (" ").join(command)
                 regex_search_di(string)
