@@ -23,15 +23,18 @@ def ny(c):
 def remove_folder(f):
     try:
         if os.path.isdir(f):
-            file = Fore.RED+f+Fore.RESET
-            dire = Fore.GREEN+os.getcwd()+Fore.RESET
-            print("You are going to remove {} from {}".format(file, dire))
-            c = ny(input("CONTINUE?[Y/n]: "))
-            if c.upper() == "Y":
-                os.rmdir(f)
-                print("REMOVED {} FROM {}\n".format(file, dire))
+            if os.path.getsize(f) == 0:
+                file = Fore.RED+f+Fore.RESET
+                dire = Fore.GREEN+os.getcwd()+Fore.RESET
+                print("You are going to remove {} from {}".format(file, dire))
+                c = ny(input("CONTINUE?[Y/n]: "))
+                if c.upper() == "Y":
+                    os.rmdir(f)
+                    print("REMOVED {} FROM {}\n".format(file, dire))
+                else:
+                    print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
             else:
-                print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
+                print(Fore.RED+"THE FOLDER IS NOT EMPTY."+Fore.RESET+"\n")
         else:
             print(Fore.RED+"FOLDER NOT FOUND."+Fore.RESET+"\n")
 
