@@ -54,14 +54,14 @@ def clear():
 def BMP(s):
     return "".join((i if ord(i) < 10000 else '\ufffd' for i in s))
 
-def counter_label(n, s):
+def counter_label(n, s, fc):
     if n == 0:
         print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
     else:
         if n == 1:
             print(Fore.BLACK+Back.GREEN+"\n1 ITEMS FOUND."+Fore.RESET+Back.RESET+"\n")
         else:
-            print(Fore.BLACK+Back.GREEN+"\n{} ITEMS FOUND.".format(n)+Fore.RESET+Back.RESET+"\n")
+            print(Fore.BLACK+Back.GREEN+"\n{} ITEMS FOUND IN {} FOLDER/S.".format(n, fc)+Fore.RESET+Back.RESET+"\n")
 
 def regex_search_di(s):
     count = 0
@@ -72,13 +72,13 @@ def regex_search_di(s):
             if match_:
                 count+=1
                 print(Fore.GREEN+'{}-'.format(count)+os.path.join(os.getcwd(),BMP(Fore.YELLOW+Style.DIM+i+Fore.RESET+Style.NORMAL)))
-        counter_label(count, s)
+        counter_label(count, s, 1)
         
     except Exception as e:
         print(Fore.RED+str(e)+Fore.RESET+"\n")
 
 def regex_search(s):
-    global showed_dir
+    global showed_dir, folder_counter
     count = 0
     try:
         print("")
@@ -90,8 +90,9 @@ def regex_search(s):
                     count+=1
                     print(Fore.GREEN+'{}-'.format(count)+os.path.join(root,BMP(Fore.YELLOW+Style.DIM+file+Fore.RESET+Style.NORMAL)))
             showed_dir = False
-
-        counter_label(count, s)
+            
+        counter_label(count, s, folder_counter)
+        folder_counter = 0
         '''if count == 0:
             print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
         else:
@@ -104,10 +105,11 @@ def regex_search(s):
         print(Fore.BLACK+Back.RED+'ERROR: {} '.format(str(e))+Fore.RESET+Back.RESET+"\n")
                 
 def show_dir(direc):
-    global showed_dir
+    global showed_dir, folder_counter
     if showed_dir == False:
         print(Fore.BLUE+Back.WHITE+direc+Fore.RESET+Back.RESET)
-        showed_dir = True        
+        showed_dir = True
+        folder_counter += 1
 
 def show_files(t):
     print("")
@@ -138,6 +140,7 @@ def start():
 commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs']
 start()
 showed_dir = False
+folder_counter = 0
 while True:
     command = input(os.getcwd()+"\FM:\> ").split(" ")
     if command[0] in commands:
