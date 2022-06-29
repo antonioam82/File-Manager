@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 from colorama import init, Fore, Back, Style
+import shutil
 import re
 
 def change_dir(d):
@@ -66,6 +67,17 @@ def counter_label(n, s, fc):
         else:
             print(Fore.BLACK+Back.GREEN+"\n{} ITEMS FOUND IN {} FOLDER/S.".format(n, fc)+Fore.RESET+Back.RESET+"\n")
 
+def remove_ne_folder(f):
+    if os.path.isdir(f):
+        try:
+            shutil.rmtree(f)
+        except Exception as e:
+            print(Fore.RED + str(e) + Fore.RESET + "\n")
+    else:
+        print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
+
+        
+
 def regex_search_di(s):
     count = 0
     try:
@@ -96,13 +108,6 @@ def regex_search(s):
             
         counter_label(count, s, folder_counter)
         folder_counter = 0
-        '''if count == 0:
-            print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
-        else:
-            if count == 1:
-                print(Fore.BLACK+Back.GREEN+"\n1 FILES FOUND."+Fore.RESET+Back.RESET+"\n")
-            else:
-                print(Fore.BLACK+Back.GREEN+"\n{} FILES FOUND.".format(count)+Fore.RESET+Back.RESET+"\n")'''
                 
     except Exception as e:
         print(Fore.BLACK+Back.RED+'ERROR: {} '.format(str(e))+Fore.RESET+Back.RESET+"\n")
@@ -140,7 +145,7 @@ def start():
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs']
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt']
 start()
 showed_dir = False
 folder_counter = 0
@@ -203,6 +208,11 @@ while True:
                 regex_search_di(string)
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
+        elif command[0] == 'rmt':
+            if len(command) >= 2:
+                command.pop(0)
+                rd = (" ").join(command)
+                remove_ne_folder(rd)
     else:
         print(Fore.RED+"UNKNOW COMMAND\n"+Fore.RESET)
                        
