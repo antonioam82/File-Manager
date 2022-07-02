@@ -140,6 +140,24 @@ def show_files(t):
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
 
+def lfws():
+    #global command
+    if len(command) >= 2:
+        extrc = command.pop(0)
+        string = (" ").join(command)
+        if extrc == 'md':
+            make_dir(string)
+        elif extrc == 'rmd':
+            remove_folder(string)
+        elif extrc == 'trs':
+            regex_search(string)
+        elif extrc == 'rs':
+            regex_search_di(string)
+        else:
+            remove_ne_folder(string)
+    else:
+        print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
+
 def start():
     init()
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
@@ -180,39 +198,10 @@ while True:
                 print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
-        elif command[0] == 'md':
-            if len(command) >= 2:
-                command.pop(0)
-                nf = (" ").join(command)
-                make_dir(nf)
-            else:
-                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
-        elif command[0] == 'rmd':
-            if len(command) >= 2:
-                command.pop(0)
-                rd = (" ").join(command)
-                remove_folder(rd)
-            else:
-                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
-        elif command[0] == 'trs':
-            if len(command) >= 2:
-                command.pop(0)
-                string = (" ").join(command)
-                regex_search(string)
-            else:
-                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
-        elif command[0] == 'rs':
-            if len(command) >= 2:
-                command.pop(0)
-                string = (" ").join(command)
-                regex_search_di(string)
-            else:
-                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
-        elif command[0] == 'rmt':
-            if len(command) >= 2:
-                command.pop(0)
-                rd = (" ").join(command)
-                remove_ne_folder(rd)
+                
+        elif command[0] == 'md' or command[0] == 'rmd' or command[0] == 'trs' or command[0] == 'rs' or command[0] == 'rmt':
+            lfws()
+
     else:
         print(Fore.RED+"UNKNOW COMMAND\n"+Fore.RESET)
                        
