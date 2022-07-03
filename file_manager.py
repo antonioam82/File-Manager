@@ -35,7 +35,7 @@ def remove_folder(f):
                 else:
                     print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
             else:
-                print(Fore.RED+"THE FOLDER IS NOT EMPTY."+Fore.RESET+"\n")
+                print(Fore.RED+"THE FOLDER IS NOT EMPTY (FOR NOT EMPTY FOLDERS YOU CAN USE 'rmt' COMMNAD INSTEAD)."+Fore.RESET+"\n")
         else:
             print(Fore.RED+"FOLDER NOT FOUND."+Fore.RESET+"\n")
 
@@ -147,6 +147,8 @@ def lfws():
         string = (" ").join(command)
         if extrc == 'md':
             make_dir(string)
+        elif extrc == 'cd':
+            change_dir(string)
         elif extrc == 'rmd':
             remove_folder(string)
         elif extrc == 'trs':
@@ -170,14 +172,7 @@ folder_counter = 0
 while True:
     command = input(os.getcwd()+"\FM:\> ").split(" ")
     if command[0] in commands:
-        if command[0] == 'cd':
-            if len(command) >= 2:
-                command.pop(0)
-                direc = (" ").join(command)
-                change_dir(direc)
-            else:
-                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
-        elif command[0] == 'q':
+        if command[0] == 'q':
             if len(command) == 1:
                 break
             else:
@@ -199,7 +194,7 @@ while True:
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
                 
-        elif command[0] == 'md' or command[0] == 'rmd' or command[0] == 'trs' or command[0] == 'rs' or command[0] == 'rmt':
+        else:
             lfws()
 
     else:
