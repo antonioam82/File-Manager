@@ -119,6 +119,31 @@ def show_dir(direc):
         showed_dir = True
         folder_counter += 1
 
+def remove_files(s):
+    files_to_remove = []
+    count = 0
+    print("")
+    for i in os.listdir():
+        match_ = re.search(s, i)
+        if match_:
+            count+=1
+            print(Fore.RED+'{}-'.format(count)+i+Fore.RESET)
+            files_to_remove.append(i)
+    print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)
+    num = Fore.RED+str(count)+Fore.RESET
+    dire = Fore.GREEN+os.getcwd()+Fore.RESET
+    print("You are going to remove {} file/s from {}.".format(num,dire))
+    #print(files_to_remove)
+    c = ny(input("CONTINUE?[Y/n]: "))
+    if c.upper() == "Y":
+        for i in files_to_remove:
+            os.remove(i)
+        print("REMOVED {} FILE/S FROM {}\n".format(num, dire))
+    else:
+        print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
+    files_to_remove = []
+    count = 0
+            
 def show_files(t):
     print("")
     counter = 1
@@ -155,6 +180,8 @@ def lfws():
             regex_search(string)
         elif extrc == 'rs':
             regex_search_di(string)
+        elif extrc == 'rmf':
+            remove_files(string)
         else:
             remove_ne_folder(string)
     else:
@@ -165,7 +192,7 @@ def start():
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt']
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf']
 start()
 showed_dir = False
 folder_counter = 0
