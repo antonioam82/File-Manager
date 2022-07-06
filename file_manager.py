@@ -119,6 +119,25 @@ def show_dir(direc):
         showed_dir = True
         folder_counter += 1
 
+def cut_or_copy(s):
+    files_to_move = []
+    count = 0
+    print("")
+    for i in os.listdir():
+        match_ = re.search(s, i)
+        if match_:
+            count+=1
+            print(Fore.RED+'{}-'.format(count)+i+Fore.RESET)
+            files_to_remove.append(i)
+    print(Back.RED+Fore.BLACK+"\nCAUTION!!"+Back.RESET+Fore.RESET)
+    num = Fore.RED+str(count)+Fore.RESET
+    dire = Fore.GREEN+os.getcwd()+Fore.RESET
+    print("You are going to move {} file/s from {}.".format(num,dire))
+
+    files_to_move = []
+    count = 0
+
+    
 def remove_files(s):
     files_to_remove = []
     count = 0
@@ -192,7 +211,7 @@ def start():
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf']
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp']
 start()
 showed_dir = False
 folder_counter = 0
