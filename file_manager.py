@@ -152,7 +152,6 @@ def remove_files(s):
     num = Fore.RED+str(count)+Fore.RESET
     dire = Fore.GREEN+os.getcwd()+Fore.RESET
     print("You are going to remove {} file/s from {}.".format(num,dire))
-    #print(files_to_remove)
     c = ny(input("CONTINUE?[Y/n]: "))
     if c.upper() == "Y":
         for i in files_to_remove:
@@ -211,7 +210,7 @@ def start():
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp']
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp']#'rmt' por completar
 start()
 showed_dir = False
 folder_counter = 0
@@ -237,6 +236,15 @@ while True:
         elif command[0] == 'sd':
             if len(command) == 1:
                 print("Current Directory: " +Fore.GREEN+ "{}".format(os.getcwd())+Fore.RESET+"\n")
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
+        elif command[0] == 'cp' or command[0] == 'ct':
+            if len(command) >= 3:
+                com = command.pop(0)
+                folder = command.pop()
+                string = (" ").join(command)
+                '''if os.path.isdir(folder):
+                    os.chdir(folder)'''
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
                 
