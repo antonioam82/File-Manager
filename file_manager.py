@@ -76,7 +76,6 @@ def remove_ne_folder(f):
     else:
         print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
 
-        
 
 def regex_search_di(s):
     count = 0
@@ -148,19 +147,22 @@ def remove_files(s):
             count+=1
             print(Fore.RED+'{}-'.format(count)+i+Fore.RESET)
             files_to_remove.append(i)
-    print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)
-    num = Fore.RED+str(count)+Fore.RESET
-    dire = Fore.GREEN+os.getcwd()+Fore.RESET
-    print("You are going to remove {} file/s from {}.".format(num,dire))
-    c = ny(input("CONTINUE?[Y/n]: "))
-    if c.upper() == "Y":
-        for i in files_to_remove:
-            os.remove(i)
-        print("REMOVED {} FILE/S FROM {}\n".format(num, dire))
+    if count > 0:
+        print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)
+        num = Fore.RED+str(count)+Fore.RESET
+        dire = Fore.GREEN+os.getcwd()+Fore.RESET
+        print("You are going to remove {} file/s from {}.".format(num,dire))
+        c = ny(input("CONTINUE?[Y/n]: "))
+        if c.upper() == "Y":
+            for i in files_to_remove:
+                os.remove(i)
+            print("REMOVED {} FILE/S FROM {}\n".format(num, dire))
+        else:
+            print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
+        files_to_remove = []
+        count = 0
     else:
-        print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
-    files_to_remove = []
-    count = 0
+        print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
             
 def show_files(t):
     print("")
