@@ -159,6 +159,7 @@ def remove_files(s):
                 os.remove(i)
                 print(Fore.RED+"DELETED "+Fore.RESET+i)
             print("\nREMOVED {} FILE/S FROM {}\n".format(num, dire))
+            
         else:
             print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
         files_to_remove = []
@@ -257,4 +258,4 @@ while True:
 
     else:
         print(Fore.RED+"UNKNOW COMMAND\n"+Fore.RESET)
-                       
+
