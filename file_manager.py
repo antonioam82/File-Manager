@@ -154,9 +154,12 @@ def remove_files(s):
         print("You are going to remove {} file/s from {}.".format(num,dire))
         c = ny(input("CONTINUE?[Y/n]: "))
         if c.upper() == "Y":
+            print("")
             for i in files_to_remove:
                 os.remove(i)
-            print("REMOVED {} FILE/S FROM {}\n".format(num, dire))
+                print(Fore.RED+"DELETED "+Fore.RESET+i)
+            print("\nREMOVED {} FILE/S FROM {}\n".format(num, dire))
+            
         else:
             print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
         files_to_remove = []
