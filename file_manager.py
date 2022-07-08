@@ -248,4 +248,4 @@ while True:
 
     else:
         print(Fore.RED+"UNKNOW COMMAND\n"+Fore.RESET)
-                       
+
