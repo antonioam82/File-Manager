@@ -118,53 +118,44 @@ def show_dir(direc):
         showed_dir = True
         folder_counter += 1
 
-def cut_or_copy(s):
-    files_to_move = []
+def files_managed(s, act):
+    file_list = []
     count = 0
     print("")
     for i in os.listdir():
-        match_ = re.search(s, i)
-        if match_:
+        match = re.search(s, i)
+        if match:
             count+=1
             print(Fore.RED+'{}-'.format(count)+i+Fore.RESET)
-            files_to_remove.append(i)
-    print(Back.RED+Fore.BLACK+"\nCAUTION!!"+Back.RESET+Fore.RESET)
-    num = Fore.RED+str(count)+Fore.RESET
-    dire = Fore.GREEN+os.getcwd()+Fore.RESET
-    print("You are going to move {} file/s from {}.".format(num,dire))
-
-    files_to_move = []
-    count = 0
-
-    
-def remove_files(s):
-    files_to_remove = []
-    count = 0
-    print("")
-    for i in os.listdir():
-        match_ = re.search(s, i)
-        if match_:
-            count+=1
-            print(Fore.RED+'{}-'.format(count)+i+Fore.RESET)
-            files_to_remove.append(i)
+            file_list.append(i)
     if count > 0:
         print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)
         num = Fore.RED+str(count)+Fore.RESET
         dire = Fore.GREEN+os.getcwd()+Fore.RESET
-        print("You are going to remove {} file/s from {}.".format(num,dire))
+        print("You are going to {} {} file/s from {}.".format(act,num,dire))
         c = ny(input("CONTINUE?[Y/n]: "))
         if c.upper() == "Y":
-            print("")
-            for i in files_to_remove:
-                os.remove(i)
-                print(Fore.RED+"DELETED "+Fore.RESET+i)
-            print("\nREMOVED {} FILE/S FROM {}\n".format(num, dire))
+            return file_list, count
         else:
             print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
-        files_to_remove = []
-        count = 0
     else:
         print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
+            
+def cut_or_copy(s):
+    files = files_managed(s,"move")
+    print(files)
+
+    
+def remove_files(s):
+    files = files_managed(s,"remove")
+    if files:
+        print("")
+        for i in files[0]:
+            os.remove(i)
+            print(Fore.RED+"DELETED "+Fore.RESET+i)
+        num = Fore.RED+str(files[1])+Fore.RESET
+        dire = Fore.GREEN+os.getcwd()+Fore.RESET
+        print("\nREMOVED {} FILE/S FROM {}\n".format(num, dire))
             
 def show_files(t):
     print("")
