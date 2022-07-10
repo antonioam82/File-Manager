@@ -145,8 +145,8 @@ def cut_or_copy(s,act,dest):
     files = files_managed(s,"move")
     count = 0
     if files:
-        for i in files[0]:
-            if act == "cp":
+        if act == "cp":
+            for i in files[0]:
                 try:
                     shutil.copy(i,dest)
                     src = Fore.GREEN+os.getcwd()+Fore.RESET
@@ -155,12 +155,18 @@ def cut_or_copy(s,act,dest):
                     count += 1
                 except Exception as e:
                     print(Fore.BLACK+Back.RED+"ERROR"+Fore.RESET+Back.RESET+str(e))
-            #print("\nCOPIED {} FILE/S FROM {}\n".format(count, src))
-            else:
+            print("\nCOPIED {} FILE/S FROM {}\n".format(count, src))
+        else:
+            for i in files[0]:
                 try:
                     shutil.move(i,dest)
+                    src = Fore.GREEN+os.getcwd()+Fore.RESET
+                    dst = Fore.GREEN+dest+Fore.RESET
+                    print(Fore.YELLOW+"MOVED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
+                    count += 1
                 except Exception as e:
                     print(Fore.BLACK+Back.RED+"ERROR"+Fore.RESET+Back.RESET+str(e))
+            print("\nMOVED {} FILE/S FROM {}\n".format(count, src))
    
 def remove_files(s):
     files = files_managed(s,"remove")
