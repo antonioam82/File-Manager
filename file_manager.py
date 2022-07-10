@@ -141,18 +141,37 @@ def files_managed(s, act):
     else:
         print(Fore.BLACK+Back.RED+"No match with \'{}\'.".format(s)+Fore.RESET+Back.RESET+"\n")
             
-def cut_or_copy(s):
+def cut_or_copy(s,act,dest):
     files = files_managed(s,"move")
-    print(files)
-
-    
+    count = 0
+    if files:
+        for i in files[0]:
+            if act == "cp":
+                try:
+                    shutil.copy(i,dest)
+                    src = Fore.GREEN+os.getcwd()+Fore.RESET
+                    dst = Fore.GREEN+dest+Fore.RESET
+                    print(Fore.YELLOW+"COPIED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
+                    count += 1
+                except Exception as e:
+                    print(Fore.BLACK+Back.RED+"ERROR"+Fore.RESET+Back.RESET+str(e))
+            #print("\nCOPIED {} FILE/S FROM {}\n".format(count, src))
+            else:
+                try:
+                    shutil.move(i,dest)
+                except Exception as e:
+                    print(Fore.BLACK+Back.RED+"ERROR"+Fore.RESET+Back.RESET+str(e))
+   
 def remove_files(s):
     files = files_managed(s,"remove")
     if files:
         print("")
         for i in files[0]:
-            os.remove(i)
-            print(Fore.RED+"DELETED "+Fore.RESET+i)
+            try:
+                os.remove(i)
+                print(Fore.RED+"DELETED "+Fore.RESET+i)
+            except Esception as e:
+                print(Fore.BLACK+Back.RED+"ERROR"+Fore.RESET+Back.RESET+str(e))
         num = Fore.RED+str(files[1])+Fore.RESET
         dire = Fore.GREEN+os.getcwd()+Fore.RESET
         print("\nREMOVED {} FILE/S FROM {}\n".format(num, dire))
@@ -237,9 +256,11 @@ while True:
             if len(command) >= 3:
                 com = command.pop(0)
                 folder = command.pop()
-                string = (" ").join(command)
-                '''if os.path.isdir(folder):
-                    os.chdir(folder)'''
+                if os.path.isdir(folder):
+                    string = (" ").join(command)
+                    cut_or_copy(string,com,folder)
+                else:
+                    print(Fore.RED+"FOLDER NOT FOUND."+Fore.RESET+"\n")
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
                 
