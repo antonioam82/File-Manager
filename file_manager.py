@@ -132,7 +132,7 @@ def files_managed(s, act):
         print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)
         num = Fore.RED+str(count)+Fore.RESET
         dire = Fore.GREEN+os.getcwd()+Fore.RESET
-        print("You are going to {} {} file/s from {}.".format(act,num,dire))
+        print("You are going to {} {} file/s from {}".format(act,num,dire))
         c = ny(input("CONTINUE?[Y/n]: "))
         if c.upper() == "Y":
             return file_list, count
@@ -145,27 +145,26 @@ def cut_or_copy(s,act,dest):
     files = files_managed(s,"move")
     count = 0
     if files:
+        src = Fore.GREEN+os.getcwd()+Fore.RESET
+        dst = Fore.GREEN+dest+Fore.RESET
+        print("")
         if act == "cp":
             for i in files[0]:
                 try:
                     shutil.copy(i,dest)
-                    src = Fore.GREEN+os.getcwd()+Fore.RESET
-                    dst = Fore.GREEN+dest+Fore.RESET
-                    print(Fore.YELLOW+"COPIED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
+                    #print(Fore.YELLOW+"COPIED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
                     count += 1
                 except Exception as e:
-                    print(Fore.BLACK+Back.RED+"ERROR"+Fore.RESET+Back.RESET+str(e))
+                    print(Fore.RED+"ERROR"+Fore.RESET+str(e))
             print("\nCOPIED {} FILE/S FROM {}\n".format(count, src))
         else:
             for i in files[0]:
                 try:
                     shutil.move(i,dest)
-                    src = Fore.GREEN+os.getcwd()+Fore.RESET
-                    dst = Fore.GREEN+dest+Fore.RESET
-                    print(Fore.YELLOW+"MOVED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
+                    #print(Fore.YELLOW+"MOVED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
                     count += 1
                 except Exception as e:
-                    print(Fore.BLACK+Back.RED+"ERROR"+Fore.RESET+Back.RESET+str(e))
+                    print(Fore.RED+"ERROR"+Fore.RESET+str(e))
             print("\nMOVED {} FILE/S FROM {}\n".format(count, src))
    
 def remove_files(s):
