@@ -155,7 +155,7 @@ def cut_or_copy(s,act,dest):
                     #print(Fore.YELLOW+"COPIED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
                     count += 1
                 except Exception as e:
-                    print(Fore.RED+"ERROR"+Fore.RESET+str(e))
+                    print(Fore.RED+"ERROR "+Fore.RESET+str(e))
             print("\nCOPIED {} FILE/S FROM {}\n".format(count, src))
         else:
             for i in files[0]:
@@ -164,7 +164,7 @@ def cut_or_copy(s,act,dest):
                     #print(Fore.YELLOW+"MOVED "+Fore.RESET+i+" FROM {} TO {}".format(src,dst))
                     count += 1
                 except Exception as e:
-                    print(Fore.RED+"ERROR"+Fore.RESET+str(e))
+                    print(Fore.RED+"ERROR "+Fore.RESET+str(e))
             print("\nMOVED {} FILE/S FROM {}\n".format(count, src))
    
 def remove_files(s):
