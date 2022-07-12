@@ -21,6 +21,23 @@ def ny(c):
         print(chr(7));c=input("Enter \'N/n\' or \'Y/y\': ")
     return(c)
 
+def show_commands():
+    print(Fore.GREEN+"\n-------------------------------------------COMMANDS-------------------------------------------")
+    print("cd <path>--------------------------------------------------------------Change current directory")
+    print("cp <regex string> <destination path>--------------------------Copy files into a given directory")
+    print("ct <regex string> <destination path>--------------------------Move files into a given directory")
+    print("ls----------------------------------------------------------List all items in current directory")
+    print("fl----------------------------------------------------------List all files in current directory")
+    print("fld-------------------------------------------------------List all folders in current directory")
+    print("sd-----------------------------------------------------------------------Show current directory")
+    print("md <new folder name>-----------------------------------Create a new folder in current directory")
+    print("rmd <empty folder>----------------------------------Remove an empty folder in current directory")
+    print("trs <regex string>-------------------------------------Tree search files from current directory")
+    print("rs <regex string>---------------------------------------------Search files in current directory")
+    print("rmf <regex string>--------------------------------------------Remove files in current directory")
+    print("cl---------------------------------------------------------------------------------Clear screen"+Fore.RESET+"\n")
+    
+
 def remove_folder(f):
     try:
         if os.path.isdir(f):
@@ -229,7 +246,7 @@ def start():
     print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp']#'rmt' por completar
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp','help']#'rmt' por completar
 start()
 showed_dir = False
 folder_counter = 0
@@ -239,6 +256,11 @@ while True:
         if command[0] == 'q':
             if len(command) == 1:
                 break
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
+        elif command[0] == 'help':
+            if len(command) == 1:
+                show_commands()
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'ls' or command[0] == 'fl' or command[0] == 'fld':
@@ -274,4 +296,3 @@ while True:
 
     else:
         print(Fore.RED+"UNKNOW COMMAND\n"+Fore.RESET)
-                       
