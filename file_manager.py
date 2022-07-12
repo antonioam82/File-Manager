@@ -22,7 +22,7 @@ def ny(c):
     return(c)
 
 def show_commands():
-    print(Fore.GREEN+"\n-------------------------------------------COMMANDS-------------------------------------------")
+    print(Fore.GREEN+"\n--------------------------------------------COMMANDS-------------------------------------------")
     print("cd <path>--------------------------------------------------------------Change current directory")
     print("cp <regex string> <destination path>--------------------------Copy files into a given directory")
     print("ct <regex string> <destination path>--------------------------Move files into a given directory")
@@ -32,9 +32,12 @@ def show_commands():
     print("sd-----------------------------------------------------------------------Show current directory")
     print("md <new folder name>-----------------------------------Create a new folder in current directory")
     print("rmd <empty folder>----------------------------------Remove an empty folder in current directory")
+    print("rmt <not empty folder>---------------------------Remove a not empty folder in current directory")
     print("trs <regex string>-------------------------------------Tree search files from current directory")
     print("rs <regex string>---------------------------------------------Search files in current directory")
     print("rmf <regex string>--------------------------------------------Remove files in current directory")
+    print("help--------------------------------------------------------------------------Show command list")
+    print("q----------------------------------------------------------------------------Finish the program")
     print("cl---------------------------------------------------------------------------------Clear screen"+Fore.RESET+"\n")
     
 
@@ -243,7 +246,7 @@ def lfws():
 
 def start():
     init()
-    print(Back.BLUE+"\n---------------------------------FILE MANAGER---------------------------------"+Back.RESET+"\n")
+    print(Back.BLUE+"\n-----------------------------------------FILE MANAGER-----------------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
 commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp','help']#'rmt' por completar
