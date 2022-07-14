@@ -88,11 +88,30 @@ def counter_label(n, s, fc):
             print(Fore.BLACK+Back.GREEN+"\n{} ITEMS FOUND IN {} FOLDER/S.".format(n, fc)+Fore.RESET+Back.RESET+"\n")
 
 def remove_ne_folder(f):
+    global showed_dir, folder_counter
+    count = 0
+    num_folders = 0
     if os.path.isdir(f):
-        try:
+        print("")
+        for root, folders, files in os.walk(f):
+            for file in files:
+                show_dir(root)
+                count+=1
+                print(Fore.RED+'{}-'.format(count)+os.path.join(root,BMP(Fore.RED+Style.DIM+file+Fore.RESET+Style.NORMAL)))
+            showed_dir = False
+            num_folders+=1
+
+        folder_counter = 0
+        print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)####################################Conv a función
+        num = Fore.RED+str(count)+Fore.RESET
+        flds = Fore.RED+str(num_folders)+Fore.RESET
+        print("You are going to remove {} files and {} folders.".format(num,flds))
+        c = ny(input("CONTINUE?[Y/n]: "))
+            
+        '''try:
             shutil.rmtree(f)
         except Exception as e:
-            print(Fore.RED + str(e) + Fore.RESET + "\n")
+            print(Fore.RED + str(e) + Fore.RESET + "\n")'''
     else:
         print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
 
@@ -112,10 +131,14 @@ def regex_search_di(s):
         print(Fore.RED+str(e)+Fore.RESET+"\n")
 
 def regex_search(s):
-    global showed_dir, folder_counter
+    global folder_counter, showed_dir
     count = 0
     try:
         print("")
+        '''for dirpath, dirnames, files in os.walk(os.getcwd()):
+            print(f'Found directory: {dirpath}')
+            for file_name in files:
+                print(file_name)'''
         for root, folders, files in os.walk(os.getcwd()):
             for file in files:
                 match_ = re.search(s, file)
@@ -223,7 +246,6 @@ def show_files(t):
         print(Fore.RED + str(e) + Fore.RESET + "\n")
 
 def lfws():
-    #global command
     if len(command) >= 2:
         extrc = command.pop(0)
         string = (" ").join(command)
