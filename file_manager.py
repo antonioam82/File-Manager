@@ -101,17 +101,22 @@ def remove_ne_folder(f):
             showed_dir = False
             num_folders+=1
 
-        folder_counter = 0
-        print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)####################################Conv a función
-        num = Fore.RED+str(count)+Fore.RESET
-        flds = Fore.RED+str(num_folders)+Fore.RESET
-        print("You are going to remove {} files and {} folders.".format(num,flds))
-        c = ny(input("CONTINUE?[Y/n]: "))
-            
-        '''try:
-            shutil.rmtree(f)
-        except Exception as e:
-            print(Fore.RED + str(e) + Fore.RESET + "\n")'''
+        folder_counter = 0##########
+
+        if count > 0:
+            print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)####################################Conv a función
+            num = Fore.RED+str(count)+Fore.RESET
+            flds = Fore.RED+str(num_folders)+Fore.RESET
+            print("You are going to remove {} files and {} folders.".format(num,flds))
+            c = ny(input("CONTINUE?[Y/n]: "))
+            if c.upper() == "Y":
+                try:
+                    shutil.rmtree(f)
+                    print("\nREMOVED {} FILES AND {} FOLDERS.".format(num, flds))
+                except Exception as e:
+                    print(Fore.RED + str(e) + Fore.RESET + "\n")
+            else:
+                print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
     else:
         print(Fore.RED+"Directory not found."+Fore.RESET+"\n")
 
