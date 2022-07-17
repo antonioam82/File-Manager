@@ -166,6 +166,13 @@ def show_dir(direc):
         showed_dir = True
         folder_counter += 1
 
+def remove_all_files():
+    c_d = os.getcwd()
+    for i in os.listdir(c_d):
+        if os.path.isfile(i):
+            os.remove(i)
+            print("Removed...")
+
 def files_managed(s, act):
     file_list = []
     count = 0
@@ -276,7 +283,7 @@ def start():
     print(Back.BLUE+"\n-----------------------------------------FILE MANAGER-----------------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp','help']
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','raf','trs','rs','rmt','rmf','ct','cp','help']
 start()
 showed_dir = False
 folder_counter = 0
@@ -286,6 +293,11 @@ while True:
         if command[0] == 'q':
             if len(command) == 1:
                 break
+            else:
+                print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
+        elif command[0] == 'raf':
+            if len(command) == 1:
+                remove_all_files()
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'help':
