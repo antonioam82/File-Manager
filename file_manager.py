@@ -101,10 +101,10 @@ def remove_ne_folder(f):
             showed_dir = False
             num_folders+=1
 
-        folder_counter = 0##########
+        folder_counter = 0
 
         if count > 0:
-            print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)####################################Conv a función
+            print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)
             num = Fore.RED+str(count)+Fore.RESET
             flds = Fore.RED+str(num_folders)+Fore.RESET
             print("You are going to remove {} files and {} folders.".format(num,flds))
@@ -276,7 +276,7 @@ def start():
     print(Back.BLUE+"\n-----------------------------------------FILE MANAGER-----------------------------------------"+Back.RESET+"\n")
     print("Current Directory: {}\n".format(os.getcwd()))
 
-commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp','help']#'rmt' por completar
+commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','trs','rs','rmt','rmf','ct','cp','help']
 start()
 showed_dir = False
 folder_counter = 0
