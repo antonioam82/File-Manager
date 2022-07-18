@@ -168,10 +168,17 @@ def show_dir(direc):
 
 def remove_all_files():
     c_d = os.getcwd()
+    counter = 0
     for i in os.listdir(c_d):
         if os.path.isfile(i):
-            os.remove(i)
-            print("Removed...")
+            try:
+                os.remove(i)
+                counter+=1
+            except Exception as e:
+                print(Fore.RED+"ERROR "+Fore.RESET+str(e))
+    num = Fore.RED+str(counter)+Fore.RESET
+    dire = Fore.GREEN+os.getcwd()+Fore.RESET
+    print("\nREMOVED {} FILE/S FROM {}\n".format(num, dire))
 
 def files_managed(s, act):
     file_list = []
