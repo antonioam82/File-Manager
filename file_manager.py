@@ -36,6 +36,7 @@ def show_commands():
     print("trs <regex string>-------------------------------------Tree search files from current directory")
     print("rs <regex string>---------------------------------------------Search files in current directory")
     print("rmf <regex string>--------------------------------------------Remove files in current directory")
+    print("raf-----------------------------------------------------Remove all files from current directory")
     print("help--------------------------------------------------------------------------Show command list")
     print("q----------------------------------------------------------------------------Finish the program")
     print("cl---------------------------------------------------------------------------------Clear screen"+Fore.RESET+"\n")
