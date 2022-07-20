@@ -181,6 +181,25 @@ def remove_all_files():
     dire = Fore.GREEN+os.getcwd()+Fore.RESET
     print("\nREMOVED {} FILE/S FROM {}\n".format(num, dire))
 
+def files_to_remove():
+    count = 0
+    print("")
+    for i in os.listdir():
+        if os.path.isfile(i):
+            count+=1
+            print(Fore.RED+'{}-'.format(count)+i+Fore.RESET)
+    if count > 0:
+        print(Back.RED+Fore.BLACK+"\nWARNING!!"+Back.RESET+Fore.RESET)
+        num = Fore.RED+str(count)+Fore.RESET
+        dire = Fore.GREEN+os.getcwd()+Fore.RESET
+        print("You are going to remove {} file/s from {}".format(num,dire))
+        c = ny(input("CONTINUE?[Y/n]: "))
+        if c.upper() == "Y":
+            remove_all_files()
+        else:
+            print(Fore.GREEN+"Action Cancelled by user"+Fore.RESET+"\n")
+    
+
 def files_managed(s, act):
     file_list = []
     count = 0
@@ -305,7 +324,7 @@ while True:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'raf':
             if len(command) == 1:
-                remove_all_files()
+                files_to_remove()
             else:
                 print(Fore.RED+"INVALID ARGUMENT"+Fore.RESET+"\n")
         elif command[0] == 'help':
