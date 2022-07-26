@@ -266,20 +266,25 @@ def remove_files(s):
 def show_files(t):
     print("")
     counter = 1
+    num_fld = 0
+    num_fl = 0
     try:
         with os.scandir() as entries:
             for entry in entries:
                 if os.path.isdir(entry) and (t == 'ls' or t == 'fld'):
                     print(BMP(Fore.GREEN + str(counter) + "- " + entry.name))#############
                     counter += 1
+                    num_fld += 1
                 
                 elif os.path.isfile(entry) and (t == 'ls' or t == 'fl'):
                     print(BMP(Fore.YELLOW + str(counter) + "- " + entry.name))
                     counter += 1
+                    num_fl += 1
+                    
         if counter > 1:
-            print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUND ".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
+            print(Back.GREEN+Fore.BLACK+"\n{} ITEMS FOUND ({} FILE/S AND {} FOLDER/S) ".format(str(counter-1),str(num_fl),str(num_fld))+Back.RESET+Fore.RESET+"\n")
         else:
-            print(Back.RED+Fore.BLACK+"\n{} ITEMS FOUND ".format(str(counter-1))+Back.RESET+Fore.RESET+"\n")
+            print(Back.RED+Fore.BLACK+"\n{} ITEM FOUND ({} FILE/S AND {} FOLDER/S) ".format(str(counter-1),str(num_fl),str(num_fld))+Back.RESET+Fore.RESET+"\n")
             
     except Exception as e:
         print(Fore.RED + str(e) + Fore.RESET + "\n")
