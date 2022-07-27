@@ -313,7 +313,8 @@ def lfws():
 def start():
     init()
     print(Back.BLUE+"\n-----------------------------------------FILE MANAGER-----------------------------------------"+Back.RESET+"\n")
-    print("Current Directory: {}\n".format(os.getcwd()))
+    print("Current Directory: {}".format(os.getcwd()))
+    print("Type 'help' for command list.\n")
 
 commands = ['cd','q','ls','cl','sd','fl','fld','md','rmd','raf','trs','rs','rmt','rmf','ct','cp','help']
 start()
@@ -370,4 +371,3 @@ while True:
 
     else:
         print(Fore.RED+"UNKNOW COMMAND\n"+Fore.RESET)
-            
